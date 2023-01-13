@@ -147,6 +147,7 @@ class URLSessionUploader: NSObject {
 
         // configure session for wifi only uploads
         let wifiConfiguration = URLSessionConfiguration.background(withIdentifier: Keys.wifiBackgroundSessionIdentifier)
+        wifiConfiguration.connectionProxyDictionary = [:]
         wifiConfiguration.httpMaximumConnectionsPerHost = maxConcurrentTasks.intValue
         wifiConfiguration.timeoutIntervalForRequest = URLSessionUploader.determineTimeout()
         wifiConfiguration.allowsCellularAccess = false
@@ -154,6 +155,7 @@ class URLSessionUploader: NSObject {
 
         // configure regular session
         let sessionConfiguration = URLSessionConfiguration.background(withIdentifier: Keys.backgroundSessionIdentifier)
+        sessionConfiguration.connectionProxyDictionary = [:]
         sessionConfiguration.httpMaximumConnectionsPerHost = maxConcurrentTasks.intValue
         sessionConfiguration.timeoutIntervalForRequest = URLSessionUploader.determineTimeout()
         self.session = URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: queue)
